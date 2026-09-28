@@ -113,7 +113,6 @@ dmypy.json
 # Generated models stay ignored by default. Add only the final model and
 # fitted preprocessing artifacts required for inference (see README # Model).
 *.pkl
-*.joblib
 *.h5
 *.hdf5
 *.model
