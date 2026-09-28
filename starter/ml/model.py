@@ -29,7 +29,8 @@ def train_model(X_train, y_train):
 
 def compute_model_metrics(y, preds):
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model using precision, 
+    recall, and F1.
 
     Inputs
     ------
@@ -87,7 +88,8 @@ def evaluate_slices(model, X, y, rows, categorical_features):
                     "recall": recall,
                     "f1": f1,
                     "status": (
-                        "ok" if len(set(y_slice.tolist())) > 1 else "single_class"
+                        "ok" if len(set(y_slice.tolist())
+                                    ) > 1 else "single_class"
                     ),
                 }
             )
