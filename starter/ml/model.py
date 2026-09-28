@@ -1,3 +1,4 @@
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
 
@@ -16,12 +17,20 @@ def train_model(X_train, y_train):
     model : RandomForestClassifier
         Trained machine learning model.
     """
-    pass
+
+    model = RandomForestClassifier(
+        n_estimators=100,
+        random_state=42,
+        n_jobs=-1
+    )
+    model.fit(X_train, y_train)
+    return model
 
 
 def compute_model_metrics(y, preds):
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model using precision,
+    recall, and F1.
 
     Inputs
     ------
@@ -55,4 +64,34 @@ def inference(model, X):
     preds : np.ndarray
         Predictions from the model.
     """
-    pass
+    return model.predict(X)
+
+
+def evaluate_slices(model, X, y, rows, categorical_features):
+    """Return count and classification metrics for each observed category."""
+    predictions = inference(model, X)
+    results = []
+
+    for feature in categorical_features:
+        for value in rows[feature].dropna().unique():
+            mask = rows[feature].to_numpy() == value
+            y_slice = y[mask]
+            precision, recall, f1 = compute_model_metrics(
+                y_slice, predictions[mask]
+            )
+            results.append(
+                {
+                    "feature": feature,
+                    "value": str(value),
+                    "n": int(mask.sum()),
+                    "precision": precision,
+                    "recall": recall,
+                    "f1": f1,
+                    "status": (
+                        "ok" if len(set(y_slice.tolist())
+                                    ) > 1 else "single_class"
+                    ),
+                }
+            )
+
+    return results
