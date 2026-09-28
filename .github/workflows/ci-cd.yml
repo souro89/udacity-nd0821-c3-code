@@ -36,3 +36,18 @@ jobs:
 
       - name: Run flake8
         run: python -m flake8 .
+
+  deploy-render:
+    name: Deploy to Render
+    needs: test-and-lint
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          curl --fail --silent --show-error \
+            --request POST \
+            "${RENDER_DEPLOY_HOOK_URL}&ref=${COMMIT_SHA}"
