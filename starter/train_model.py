@@ -1,4 +1,8 @@
-# Train, evaluate, and save the Census salary model.
+"""
+Train, evaluate, and save the Census salary model.
+Date : 28-09-2026
+Author : Sourodeep Banerjee
+"""
 
 import json
 from pathlib import Path
@@ -31,6 +35,11 @@ LABEL = "salary"
 
 
 def main():
+    """
+    Main Runner Script for Traning and Slice Metrics Output
+
+    Output: Joblib artifact and slice_output.txt
+    """
     data = pd.read_csv(ROOT / "data" / "census.csv", skipinitialspace=True)
     for column in data.select_dtypes(include="object"):
         data[column] = data[column].str.strip()
@@ -85,7 +94,7 @@ def main():
         },
         "categorical_slices": slices,
     }
-    (model_dir / "evaluation_metrics.json").write_text(
+    (model_dir / "slice_output.txt").write_text(
         json.dumps(report, indent=2), encoding="utf-8"
     )
     print(json.dumps(report, indent=2))

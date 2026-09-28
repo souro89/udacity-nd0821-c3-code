@@ -1,3 +1,8 @@
+"""
+Data Preprocessing Module
+Date : 28-09-2026
+Author : Sourodeep Banerjee
+"""
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 

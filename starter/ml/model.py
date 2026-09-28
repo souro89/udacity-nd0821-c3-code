@@ -1,3 +1,9 @@
+"""
+Model Traning Functions and evaluate slices func
+Date : 28-09-2026
+Author : Sourodeep Banerjee
+"""
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
