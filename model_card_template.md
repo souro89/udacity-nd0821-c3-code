@@ -28,7 +28,7 @@ Held-out overall metrics:
 | Recall | 0.6378 |
 | F1 | 0.6831 |
 
-Selected demographic slices (full metrics for all categorical features are in `model/evaluation_metrics.json`):
+Selected demographic slices (full metrics for all categorical features are in `model/slice_output.txt`):
 
 | Feature | Value | Rows | Precision | Recall | F1 |
 | --- | --- | ---: | ---: | ---: | ---: |

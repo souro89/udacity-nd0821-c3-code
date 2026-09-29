@@ -105,7 +105,7 @@ def predict(payload: CensusInput) -> PredictionResponse:
     Output:
         A PredictionResponse containing the predicted salary label.
     """
-    row: dict[str: Any] = payload.model_dump(by_alias=True)
+    row: dict[str, Any] = payload.model_dump(by_alias=True)
     features = pd.DataFrame([row])
 
     processed, _, _, _ = process_data(
